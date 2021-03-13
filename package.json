@@ -9,10 +9,10 @@
   "private": true,
   "scripts": {
     "commit": "commit",
+    "build": "tsc",
     "lint": "eslint \"./src/**/*.ts\" --fix",
     "release": "standard-version",
     "start": "node ./dist/index.js",
-    "start:dev": "nodemon ./dist/index.js",
     "watch": "tsc --watch"
   },
   "dependencies": {

@@ -18,8 +18,9 @@ bot.on("message", ({ reply }: Context) =>
   reply("Sorry, I can only interact by being tagged inline")
 );
 
-bot.on("inline_query", ({ inlineQuery: { query }, reply }) => {
-  reply(smallify(query));
+bot.on("inline_query", ({ inlineQuery, reply }) => {
+  console.log(inlineQuery);
+  reply(smallify(inlineQuery.query));
 });
 
 bot.launch();

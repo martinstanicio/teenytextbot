@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { Context, Telegraf } from "telegraf";
+import { Telegraf } from "telegraf";
 import smallify from "./utils/smallify";
 
 dotenv.config();
@@ -9,18 +9,27 @@ if (typeof TOKEN === "undefined") throw Error("`TOKEN` is undefined");
 
 const bot = new Telegraf(TOKEN);
 
-bot.start(({ reply }: Context) =>
-  reply(
-    "Tag me in another chat to get your text transformed into small letters"
+bot.start(ctx =>
+  ctx.reply(
+    "Send me a message or tag me in another chat to get your text transformed into small letters!"
   )
 );
-bot.on("message", ({ reply }: Context) =>
-  reply("Sorry, I can only interact by being tagged inline")
-);
 
-bot.on("inline_query", ({ inlineQuery, reply }) => {
-  console.log(inlineQuery);
-  reply(smallify(inlineQuery.query));
+bot.on("text", ctx => ctx.reply(smallify(ctx.message.text)));
+
+bot.on("inline_query", ctx => {
+  const { query } = ctx.inlineQuery;
+  if (!query) return;
+
+  const answer = smallify(query);
+  ctx.answerInlineQuery([
+    {
+      type: "article",
+      id: "0",
+      title: answer,
+      input_message_content: { message_text: answer },
+    },
+  ]);
 });
 
 bot.launch();

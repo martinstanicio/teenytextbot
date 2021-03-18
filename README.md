@@ -7,6 +7,15 @@ Telegram bot created with TypeScript
 ## Scripts
 
 ```bash
+# compile typescript
+$ yarn build
+
+# compile typescript every time code changes
+$ yarn watch
+
+# start the bot
+$ yarn start
+
 # lint with eslint and prettier
 $ yarn lint
 

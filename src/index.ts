@@ -3,7 +3,7 @@ import { Telegraf } from "telegraf";
 import smallify from "./utils/smallify";
 
 dotenv.config();
-const { TOKEN } = process.env;
+const { DOMAIN, PORT, TOKEN } = process.env;
 
 if (typeof TOKEN === "undefined") throw Error("`TOKEN` is undefined");
 
@@ -32,7 +32,12 @@ bot.on("inline_query", ctx => {
   ]);
 });
 
-bot.launch();
+bot.launch({
+  webhook: {
+    domain: DOMAIN,
+    port: Number(PORT),
+  },
+});
 
 process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));

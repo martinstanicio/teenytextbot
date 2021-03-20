@@ -1,6 +1,6 @@
 {
   "name": "teenytextbot",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Telegram bot to transform text into small letters",
   "main": "dist/index.js",
   "repository": "https://github.com/martinstanicio/teenytextbot",
